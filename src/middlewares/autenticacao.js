@@ -9,7 +9,10 @@ exports.autenticaToken = (req, res, next) => {
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, usuario) => {
-        if(err){
+        if(err) {
+            if(err.name === 'TokenExpiredError') {
+                return res.status(401).json({ message: 'Token expirado!' });
+            }
             return res.status(403).json({ message: 'Token inválido!' });
         }
 
@@ -19,11 +22,7 @@ exports.autenticaToken = (req, res, next) => {
 }
 
 exports.verificaAdmin = (req, res, next) => {
-    this.autenticaToken(req, res, (err) => {
-        if(err) {
-            return res.status(401).json({ message: 'Acesso negado' });
-        }
-
+    this.autenticaToken(req, res, () => {
         if(!req.usuario.isAdmin) {
             return res.status(403).json({ message: 'Acesso negado: Rota exclusiva para ADMINISTRADORES!!!' });
         }

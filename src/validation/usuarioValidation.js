@@ -1,6 +1,10 @@
 const { body, validationResult } = require('express-validator');
 
 const validaUsuario = [
+    body('id')
+        .optional()
+        .isEmpty().withMessage('O campo id não pode ser enviado manualmente.'),
+
     body('nome')
         .notEmpty().withMessage('O nome e obrigatorio.')
         .isLength({ min: 3, max: 50 }).withMessage('O nome deve ter entre 3 e 50 caracteres.'),
@@ -16,10 +20,6 @@ const validaUsuario = [
     body('isAdmin')
         .optional()
         .isEmpty().withMessage('O campo isAdmin não pode ser enviado manualmente.'),
-
-    body('id')
-        .optional()
-        .isEmpty().withMessage('O campo id não pode ser enviado manualmente.'),
 
     (req, res, next) => {
         const errors = validationResult(req);

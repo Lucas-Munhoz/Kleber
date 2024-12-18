@@ -60,13 +60,14 @@ exports.getUsuarioById = async (req, res) => {
 };
 
 exports.createUsuario = async (req, res) => {
-    const novoUsuario = await usuarioService.createUsuario(req.body);
+    const novoUsuario = { ...req.body, isAdmin: false };
+    const usuarioCriado = await usuarioService.createUsuario(novoUsuario);
 
-    if(!novoUsuario) {
+    if(!usuarioCriado) {
         return res.status(400).json({ message: 'Erro ao criar usuario.' });
     }
 
-    res.status(201).json(novoUsuario);
+    res.status(201).json(usuarioCriado);
 
     /* 
     #swagger.tags = ['Usuarios']
@@ -98,44 +99,32 @@ exports.createUsuario = async (req, res) => {
 };
 
 exports.createAdmin = async (req, res) => {
-    const novoAdmin = await usuarioService.createAdmin(req.body);
+    const novoUsuario = { ...req.body, isAdmin: true };
+    const usuarioCriado = await usuarioService.createUsuario(novoUsuario);
 
-    if(!novoAdmin) {
+    if(!usuarioCriado) {
         return res.status(400).json({ message: 'Erro ao criar administrador.' });
     }
 
-    res.status(201).json(novoAdmin);
+    res.status(201).json(usuarioCriado);
 
-    //                           |
-    // PRECISA ARRUMAR ISSO AQUI V
     /* 
     #swagger.tags = ['Usuarios']
-    #swagger.summary = 'Cria um novo usuario'
+    #swagger.summary = 'Cria um novo administrador'
     #swagger.parameters['usuario'] = {
         in: 'body',
-        description: 'Informacoes do usuario',
+        description: 'Dados do novo administrador',
         required: true,
         schema: { $ref: '#/components/schemas/Usuario' }
     }
     #swagger.responses[201] = {
-        description: 'Usuario criado com sucesso',
+        description: 'Administrador criado com sucesso',
         schema: { $ref: '#/components/schemas/Usuario' }
     }
-    #swagger.responses[400] = {
-        description: 'Erro ao criar usuario.',
-        content: {
-            "application/json": {
-                schema: {
-                    type: 'object',
-                    properties: {
-                        message: { type: 'string', example: 'Erro ao criar usuario.' }
-                    }
-                }
-            }
-        }
-    }
     */
+
 };
+
 
 exports.updateUsuario = async (req, res) => {
     const usuarioAtualizado = await usuarioService.updateUsuario(parseInt(req.params.id, 10), req.body);
@@ -167,6 +156,34 @@ exports.updateUsuario = async (req, res) => {
     }
     */
 };
+
+exports.updatePropriasInformacoes = async (req, res) => {
+    const userId = req.usuario.id;
+
+    const usuarioAtualizado = await usuarioService.updateUsuario(userId, req.body);
+
+    if(!usuarioAtualizado) {
+        return res.status(400).json({ message: 'Erro ao atualizar usuário.' });
+    }
+
+    res.status(200).json(usuarioAtualizado);
+
+    /* 
+    #swagger.tags = ['Usuarios']
+    #swagger.summary = 'Atualiza as informações do próprio usuário'
+    #swagger.parameters['usuario'] = {
+        in: 'body',
+        description: 'Novos dados do usuário',
+        required: true,
+        schema: { $ref: '#/components/schemas/Usuario' }
+    }
+    #swagger.responses[200] = {
+        description: 'Usuário atualizado com sucesso',
+        schema: { $ref: '#/components/schemas/Usuario' }
+    }
+    */
+};
+
 
 exports.deleteUsuario = async (req, res) => {
     const usuarioDeletado = await usuarioService.deleteUsuario(parseInt(req.params.id, 10));

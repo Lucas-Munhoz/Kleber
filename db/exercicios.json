@@ -1,9 +1,1 @@
-[
-    {
-        "id": 1,
-        "nome": "Supino",
-        "tecnica": "Normal",
-        "intensidade": "3x6",
-        "volume": "50kg"
-    }
-]
+[{"id":1,"nome":"Supino","tecnica":"Normal","intensidade":"3x6","volume":"50kg"},{"id":2,"nome":"Barra Fixa","tecnica":"Normal","intensidade":"3x10","volume":"Sem sobrecarga"}]

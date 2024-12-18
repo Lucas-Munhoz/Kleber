@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 
 const usuarioRoutes = require('./src/routes/usuarioRoutes');
 const loginRoutes = require('./src/routes/loginRoutes');
+const exercicioRoutes = require('./src/routes/exercicioRoutes')
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 // Rotas
 app.use('/usuarios', usuarioRoutes);
 app.use(loginRoutes);
+app.use('/exercicios', exercicioRoutes)
 
 // Porta do servidor
 const PORT = process.env.PORT || 3000;

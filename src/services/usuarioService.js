@@ -36,22 +36,6 @@ exports.createUsuario = async (usuario) => {
     }
 };
 
-exports.createAdmin = async (usuario) => {
-    try {
-        const usuarios = await this.getAllUsuarios();
-        const id = usuarios.length > 0 ? usuarios[usuarios.length - 1].id + 1 : 1;
-        const novoUsuario = { id, ...usuario, isAdmin: true };
-
-        usuarios.push(novoUsuario);
-        await fs.writeFile('./db/usuarios.json', JSON.stringify(usuarios));
-
-        return novoUsuario;
-    } catch (error) {
-        console.error('Erro ao criar administrador:', error);
-        return null;
-    }
-};
-
 exports.updateUsuario = async (id, usuarioAtualizado) => {
     try {
         const usuarios = await this.getAllUsuarios();

@@ -1,0 +1,1 @@
+[{"id":1,"nome":"Administrador","email":"admin","senha":"admin","isAdmin":true},{"id":2,"nome":"Nao Adm","email":"notAdm","senha":"123","isAdmin":false},{"id":3,"nome":"Lucas","email":"lucas@adm.com","senha":"123123","isAdmin":true},{"id":4,"nome":"Lucas","email":"lucas@çlafksdj.lkfjds","senha":"123123","isAdmin":false}]

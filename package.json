@@ -1,0 +1,39 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-jwt": "^8.5.1",
+    "express-validator": "^7.2.0",
+    "nodemon": "^3.1.9",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
+  },
+  "name": "workoutrestapi",
+  "version": "1.0.0",
+  "description": "API para montar rotinas de treinamento.",
+  "main": "app.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "swagger-autogen": "node swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lucas-Munhoz/WorkoutRestAPI.git"
+  },
+  "keywords": [
+    "api",
+    "rest"
+  ],
+  "author": "Lucas Munhoz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lucas-Munhoz/WorkoutRestAPI/issues"
+  },
+  "homepage": "https://github.com/Lucas-Munhoz/WorkoutRestAPI#readme"
+}

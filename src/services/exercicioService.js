@@ -10,22 +10,6 @@ exports.getAllExercicios = async () => {
     }
 };
 
-exports.listarExercicios = async (pagina, quantidade) => {
-    try {
-        const data = await fs.readFile('./db/exercicios.json', 'utf-8');
-        const exercicios = JSON.parse(data);
-
-        const inicio = (pagina - 1) * quantidade;
-        const fim = inicio + quantidade;
-
-        return exercicios.slice(inicio, fim);
-    }
-    catch(error) {
-        console.error('Erro ao ler exercicios.json: ', error);
-        return [];
-    }
-};
-
 exports.getExercicioById = async (id) => {
     try {
         const exercicios = await this.getAllExercicios();

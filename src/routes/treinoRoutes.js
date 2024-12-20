@@ -5,11 +5,12 @@ const { validateId } = require('../validation/globalValidation');
 const { validaTreino } = require('../validation/treinoValidation');
 const { autenticaToken, verificaAdmin } = require('../middlewares/autenticacao');
 const { verificaExercicios } = require('../middlewares/verificaExercicios');
+const { validaQuantidade } = require('../middlewares/validaListagem');
 
 const router = express.Router();
 
 router.get('/listar-todos', verificaAdmin, treinoController.getAllTreinos);
-router.get('/', autenticaToken, treinoController.listarTreinos);
+router.get('/', autenticaToken, validaQuantidade, treinoController.listarTreinos);
 router.get('/:id', autenticaToken, validateId, treinoController.getTreinoById);
 router.post('/', autenticaToken, validaTreino, verificaExercicios, treinoController.createTreino);
 router.put('/:id', autenticaToken, validateId, validaTreino, verificaExercicios, treinoController.updateTreino);

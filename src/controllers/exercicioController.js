@@ -24,19 +24,58 @@ exports.getAllExercicios = async (req, res) => {
 exports.listarExercicios = async (req, res) => {
     const { pagina = 1, quantidade = 10 } = req.query;
 
-    if(![5, 10, 30].includes(Number(quantidade))) {
-        return res.status(400).json({ mensagem: 'Quantidade deve ser 5, 10 ou 30.' });
-    }
     try {
-        const exercicios = await exercicioService.listarExercicios(Number(pagina), Number(quantidade));
-        res.status(200).json(exercicios);
+        const exercicios = await exercicioService.getAllExercicios();
+        const totalExercicios = exercicios.length;
+        const totalPaginas = Math.ceil(totalExercicios / quantidade);
+        const paginaAtual = Math.min(pagina, totalPaginas);
+        const indiceInicial = (paginaAtual - 1) * quantidade;
+
+        let exerciciosPaginados = [];
+
+        for(let i = indiceInicial; i < totalExercicios && exerciciosPaginados.length < quantidade; i++) {
+            exerciciosPaginados.push(exercicios[i]);
+        }
+
+        res.status(200).json({
+            totalExercicios,
+            totalPaginas,
+            paginaAtual,
+            quantidadePorPagina: quantidade,
+            exercicios: exerciciosPaginados
+        });
     }
     catch (error) {
-        console.error('Erro ao listar exercicios:', error);
-        res.status(500).json({ menssage: 'Erro ao listar exercicios.' });
+        console.error('Erro ao obter exercicios:', error);
+        res.status(500).json({ message: 'Erro interno ao obter exercícios.' });
     }
-};
 
+    /* 
+    #swagger.tags = ['Exercicios']
+    #swagger.summary = 'Retorna todos os exercicios com paginação'
+    #swagger.responses[200] = {
+        description: 'Exercicios encontrados com sucesso',
+        content: {
+            "application/json": {
+                schema: {
+                    type: "object",
+                    properties: {
+                        totalExercicios: { type: "integer" },
+                        totalPaginas: { type: "integer" },
+                        paginaAtual: { type: "integer" },
+                        quantidadePorPagina: { type: "integer" },
+                        exercicios: {
+                            type: "array",
+                            items: { $ref: '#/components/schemas/Exercicio' }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    */
+
+};
 
 exports.getExercicioById = async (req, res) => {
     const exercicio = await exercicioService.getExercicioById(parseInt(req.params.id, 10));

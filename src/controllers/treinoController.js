@@ -24,25 +24,58 @@ exports.getAllTreinos = async (req, res) => {
 exports.listarTreinos = async (req, res) => {
     const { pagina = 1, quantidade = 10 } = req.query;
 
-    if(![5, 10, 30].includes(Number(quantidade))) {
-        return res.status(400).json({ mensagem: 'Quantidade deve ser 5, 10 ou 30.' });
-    }
+    try {
+        const treinos = await treinoService.getAllTreinos();
+        const totalTreinos = treinos.length;
+        const totalPaginas = Math.ceil(totalTreinos / quantidade);
+        const paginaAtual = Math.min(pagina, totalPaginas);
+        const indiceInicial = (paginaAtual - 1) * quantidade;
 
-    const treinos = await treinoService.listarTreinos(Number(pagina), Number(quantidade));
-    res.status(200).json(treinos);
+        let treinosPaginados = [];
+
+        for(let i = indiceInicial; i < totalTreinos && treinosPaginados.length < quantidade; i++) {
+            treinosPaginados.push(treinos[i]);
+        }
+
+        res.status(200).json({
+            totalTreinos,
+            totalPaginas,
+            paginaAtual,
+            quantidadePorPagina: quantidade,
+            treinos: treinosPaginados
+        });
+    }
+    catch(error) {
+        console.error('Erro ao obter treinos:', error);
+        res.status(500).json({ mensagem: 'Erro interno ao obter treinos.' });
+    }
 
     /* 
     #swagger.tags = ['Treinos']
-    #swagger.summary = 'Lista treinos com paginação'
+    #swagger.summary = 'Retorna todos os treinos com paginação'
     #swagger.responses[200] = {
-        description: 'Treinos listados com sucesso',
-        schema: {
-            type: "array",
-            items: { $ref: '#/components/schemas/Treino' }
+        description: 'Treinos encontrados com sucesso',
+        content: {
+            "application/json": {
+                schema: {
+                    type: "object",
+                    properties: {
+                        totalTreinos: { type: "integer" },
+                        totalPaginas: { type: "integer" },
+                        paginaAtual: { type: "integer" },
+                        quantidadePorPagina: { type: "integer" },
+                        treinos: {
+                            type: "array",
+                            items: { $ref: '#/components/schemas/Treino' }
+                        }
+                    }
+                }
+            }
         }
     }
     */
 };
+
 
 exports.getTreinoById = async (req, res) => {
     const treino = await treinoService.getTreinoById(parseInt(req.params.id, 10));

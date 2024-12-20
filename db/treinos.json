@@ -1,1 +1,27 @@
-[{"id":1,"tipo":"Musculação","descricao":"Treino de peito","tempo-estimado":"01:00","exercicios":[1,2,3]},{"id":2,"tipo":"Musculação","descricao":"Treino de costas","tempo-estimado":"01:00","exercicios":[2]}]
+[
+    {"id": 1, "tipo": "Musculação", "descricao": "Treino de peito", "tempo-estimado": "01:00", "exercicios": [1, 2, 3]},
+    {"id": 2, "tipo": "Musculação", "descricao": "Treino de costas", "tempo-estimado": "01:00", "exercicios": [2]},
+    {"id": 3, "tipo": "Musculação", "descricao": "Treino de pernas", "tempo-estimado": "01:15", "exercicios": [3, 4, 10, 16]},
+    {"id": 4, "tipo": "Musculação", "descricao": "Treino de ombro", "tempo-estimado": "01:00", "exercicios": [6, 7, 8]},
+    {"id": 5, "tipo": "Musculação", "descricao": "Treino de bíceps", "tempo-estimado": "00:45", "exercicios": [9, 12, 13]},
+    {"id": 6, "tipo": "Musculação", "descricao": "Treino de tríceps", "tempo-estimado": "00:45", "exercicios": [14, 15, 10]},
+    {"id": 7, "tipo": "Musculação", "descricao": "Treino de glúteos", "tempo-estimado": "01:00", "exercicios": [16, 17, 19]},
+    {"id": 8, "tipo": "Musculação", "descricao": "Treino de abdômen", "tempo-estimado": "00:45", "exercicios": [19, 20, 21]},
+    {"id": 9, "tipo": "Musculação", "descricao": "Treino de peito e tríceps", "tempo-estimado": "01:15", "exercicios": [1, 14, 6, 3]},
+    {"id": 10, "tipo": "Musculação", "descricao": "Treino de costas e bíceps", "tempo-estimado": "01:15", "exercicios": [2, 13, 12, 4]},
+    {"id": 11, "tipo": "Musculação", "descricao": "Treino de pernas e glúteos", "tempo-estimado": "01:30", "exercicios": [10, 16, 17, 11]},
+    {"id": 12, "tipo": "Musculação", "descricao": "Treino de ombro e tríceps", "tempo-estimado": "01:00", "exercicios": [6, 7, 14]},
+    {"id": 13, "tipo": "Musculação", "descricao": "Treino de peito e ombro", "tempo-estimado": "01:00", "exercicios": [1, 6, 8]},
+    {"id": 14, "tipo": "Musculação", "descricao": "Treino de costas e abdômen", "tempo-estimado": "01:15", "exercicios": [2, 19, 13]},
+    {"id": 15, "tipo": "Musculação", "descricao": "Treino de pernas e bíceps", "tempo-estimado": "01:00", "exercicios": [3, 9, 11]},
+    {"id": 16, "tipo": "Musculação", "descricao": "Treino de peito e costas", "tempo-estimado": "01:15", "exercicios": [1, 2, 4, 5]},
+    {"id": 17, "tipo": "Musculação", "descricao": "Treino de glúteos e abdômen", "tempo-estimado": "01:00", "exercicios": [16, 19, 20]},
+    {"id": 18, "tipo": "Musculação", "descricao": "Treino de quadríceps", "tempo-estimado": "01:00", "exercicios": [3, 10, 16]},
+    {"id": 19, "tipo": "Musculação", "descricao": "Treino de panturrilhas", "tempo-estimado": "00:45", "exercicios": [22, 25]},
+    {"id": 20, "tipo": "Musculação", "descricao": "Treino de costas e glúteos", "tempo-estimado": "01:15", "exercicios": [2, 16, 18, 5]},
+    {"id": 21, "tipo": "Musculação", "descricao": "Treino de bíceps e tríceps", "tempo-estimado": "01:00", "exercicios": [9, 12, 14]},
+    {"id": 22, "tipo": "Musculação", "descricao": "Treino de ombro e quadríceps", "tempo-estimado": "01:00", "exercicios": [6, 10, 16]},
+    {"id": 23, "tipo": "Musculação", "descricao": "Treino de peito e abdômen", "tempo-estimado": "01:00", "exercicios": [1, 19, 20]},
+    {"id": 24, "tipo": "Musculação", "descricao": "Treino de costas e ombro", "tempo-estimado": "01:15", "exercicios": [2, 4, 6]},
+    {"id": 25, "tipo": "Musculação", "descricao": "Treino de bíceps e peito", "tempo-estimado": "01:00", "exercicios": [9, 1, 8]}
+]

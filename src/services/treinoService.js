@@ -10,21 +10,6 @@ exports.getAllTreinos = async () => {
     }
 };
 
-exports.listarTreinos = async (pagina, quantidade) => {
-    try {
-        const data = await fs.readFile('./db/treinos.json', 'utf-8');
-        const treinos = JSON.parse(data);
-
-        const inicio = (pagina - 1) * quantidade;
-        const fim = inicio + quantidade;
-
-        return treinos.slice(inicio, fim);
-    } catch (error) {
-        console.error('Erro ao ler treinos.json: ', error);
-        return [];
-    }
-};
-
 exports.getTreinoById = async (id) => {
     try {
         const treinos = await this.getAllTreinos();

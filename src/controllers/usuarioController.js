@@ -147,6 +147,16 @@ exports.createAdmin = async (req, res) => {
 
 };
 
+exports.installAdmin = async (req, res) => {
+    const adminUser = {
+        nome: 'Admin',
+        email: 'admin@admin.com',
+        senha: 'admin123',
+    };
+
+    req.body = adminUser;
+    return this.createAdmin(req, res);
+};
 
 exports.updateUsuario = async (req, res) => {
     const usuarioAtualizado = await usuarioService.updateUsuario(parseInt(req.params.id, 10), req.body);

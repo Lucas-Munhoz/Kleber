@@ -24,7 +24,7 @@ exports.getAllTreinos = async (req, res) => {
 exports.listarTreinos = async (req, res) => {
     const { pagina = 1, quantidade = 10 } = req.query;
 
-    if (![5, 10, 30].includes(Number(quantidade))) {
+    if(![5, 10, 30].includes(Number(quantidade))) {
         return res.status(400).json({ mensagem: 'Quantidade deve ser 5, 10 ou 30.' });
     }
 

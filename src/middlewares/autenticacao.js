@@ -30,3 +30,15 @@ exports.verificaAdmin = (req, res, next) => {
         next();
     });
 };
+
+exports.verificaPropriedadeOuAdmin = (req, res, next) => {
+    this.autenticaToken(req, res, () => {
+        const {id} = req.params;
+
+        if(req.usuario.isAdmin || req.usuario.id === parseInt(id, 10)) {
+            return next();
+        }
+
+        return res.status(403).json({ message: 'Acesso negado. Você não tem permissão para modificar esse usuario!!!' });
+    });
+};

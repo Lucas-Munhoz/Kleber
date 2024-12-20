@@ -1,7 +1,21 @@
 const usuarioService = require('../services/usuarioService');
 
+// Middleware para verificar se o usuário é admin
+const isAdmin = (req) => req.user && req.user.isAdmin;
+
 exports.getAllUsuarios = async (req, res) => {
     const usuarios = await usuarioService.getAllUsuarios();
+
+    // Verifica se o usuário é admin
+    if (!isAdmin(req)) {
+        // Remove os campos id, senha e isAdmin
+        usuarios.forEach(usuario => {
+            delete usuario.id;
+            delete usuario.senha;
+            delete usuario.isAdmin;
+        });
+    }
+
     res.status(200).json(usuarios);
 
     /* 
@@ -24,8 +38,16 @@ exports.getAllUsuarios = async (req, res) => {
 exports.getUsuarioById = async (req, res) => {
     const usuario = await usuarioService.getUsuarioById(parseInt(req.params.id, 10));
 
-    if(!usuario) {
+    if (!usuario) {
         return res.status(404).json({ message: 'Usuario nao encontrado.' });
+    }
+
+    // Verifica se o usuário é admin
+    if (!isAdmin(req)) {
+        // Remove os campos id, senha e isAdmin
+        delete usuario.id;
+        delete usuario.senha;
+        delete usuario.isAdmin;
     }
 
     res.status(200).json(usuario);
@@ -152,33 +174,6 @@ exports.updateUsuario = async (req, res) => {
     }
     #swagger.responses[200] = {
         description: 'Usuario atualizado com sucesso',
-        schema: { $ref: '#/components/schemas/Usuario' }
-    }
-    */
-};
-
-exports.updatePropriasInformacoes = async (req, res) => {
-    const userId = req.usuario.id;
-
-    const usuarioAtualizado = await usuarioService.updateUsuario(userId, req.body);
-
-    if(!usuarioAtualizado) {
-        return res.status(400).json({ message: 'Erro ao atualizar usuário.' });
-    }
-
-    res.status(200).json(usuarioAtualizado);
-
-    /* 
-    #swagger.tags = ['Usuarios']
-    #swagger.summary = 'Atualiza as informações do próprio usuário'
-    #swagger.parameters['usuario'] = {
-        in: 'body',
-        description: 'Novos dados do usuário',
-        required: true,
-        schema: { $ref: '#/components/schemas/Usuario' }
-    }
-    #swagger.responses[200] = {
-        description: 'Usuário atualizado com sucesso',
         schema: { $ref: '#/components/schemas/Usuario' }
     }
     */

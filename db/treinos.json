@@ -1,9 +1,1 @@
-[
-    {
-        "id": 1,
-        "tipo": "Musculação",
-        "descricao": "Treino de peito",
-        "tempo-estimado": "01:00",
-        "exercicios": [1,2,3]
-    }
-]
+[{"id":1,"tipo":"Musculação","descricao":"Treino de peito","tempo-estimado":"01:00","exercicios":[1,2,3]},{"id":2,"tipo":"Musculação","descricao":"Treino de costas","tempo-estimado":"01:00","exercicios":[2]}]

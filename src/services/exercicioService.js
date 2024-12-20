@@ -10,12 +10,28 @@ exports.getAllExercicios = async () => {
     }
 };
 
+exports.listarExercicios = async (pagina, quantidade) => {
+    try {
+        const data = await fs.readFile('./db/exercicios.json', 'utf-8');
+        const exercicios = JSON.parse(data);
+
+        const inicio = (pagina - 1) * quantidade;
+        const fim = inicio + quantidade;
+
+        return exercicios.slice(inicio, fim);
+    }
+    catch(error) {
+        console.error('Erro ao ler exercicios.json: ', error);
+        return [];
+    }
+};
+
 exports.getExercicioById = async (id) => {
     try {
         const exercicios = await this.getAllExercicios();
         return exercicios.find(exercicio => exercicio.id === id) || null;
     } catch (error) {
-        console.error('Erro ao buscar exercicio por ID:', error);
+        console.error('Erro ao buscar exercicio por ID: ', error);
         return null;
     }
 };
@@ -31,7 +47,7 @@ exports.createExercicio = async (exercicio) => {
 
         return novoExercicio;
     } catch (error) {
-        console.error('Erro ao criar exercicio:', error);
+        console.error('Erro ao criar exercicio: ', error);
         return null;
     }
 };
@@ -48,7 +64,7 @@ exports.updateExercicio = async (id, exercicioAtualizado) => {
 
         return exercicios[index];
     } catch (error) {
-        console.error('Erro ao atualizar exercicio:', error);
+        console.error('Erro ao atualizar exercicio: ', error);
         return null;
     }
 };
@@ -65,7 +81,7 @@ exports.deleteExercicio = async (id) => {
 
         return exercicioDeletado;
     } catch (error) {
-        console.error('Erro ao deletar exercicio:', error);
+        console.error('Erro ao deletar exercicio: ', error);
         return null;
     }
 };

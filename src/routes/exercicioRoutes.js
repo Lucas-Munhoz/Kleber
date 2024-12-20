@@ -7,7 +7,8 @@ const { autenticaToken, verificaAdmin } = require('../middlewares/autenticacao')
 
 const router = express.Router();
 
-router.get('/', autenticaToken, exercicioController.getAllExercicios);
+router.get('/listar-todos', verificaAdmin, exercicioController.getAllExercicios);
+router.get('/', autenticaToken, exercicioController.listarExercicios);
 router.get('/:id', autenticaToken, validateId, exercicioController.getExercicioById);
 router.post('/', autenticaToken, validaExercicio, exercicioController.createExercicio);
 router.put('/:id', autenticaToken, validateId, validaExercicio, exercicioController.updateExercicio);

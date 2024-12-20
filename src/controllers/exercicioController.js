@@ -21,6 +21,23 @@ exports.getAllExercicios = async (req, res) => {
     */
 };
 
+exports.listarExercicios = async (req, res) => {
+    const { pagina = 1, quantidade = 10 } = req.query;
+
+    if(![5, 10, 30].includes(Number(quantidade))) {
+        return res.status(400).json({ mensagem: 'Quantidade deve ser 5, 10 ou 30.' });
+    }
+    try {
+        const exercicios = await exercicioService.listarExercicios(Number(pagina), Number(quantidade));
+        res.status(200).json(exercicios);
+    }
+    catch (error) {
+        console.error('Erro ao listar exercicios:', error);
+        res.status(500).json({ menssage: 'Erro ao listar exercicios.' });
+    }
+};
+
+
 exports.getExercicioById = async (req, res) => {
     const exercicio = await exercicioService.getExercicioById(parseInt(req.params.id, 10));
 

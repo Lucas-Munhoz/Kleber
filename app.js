@@ -2,8 +2,8 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
-//const swaggerUi = require('swagger-ui-express');
-//const swaggerFile = require('./swagger-output.json');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./doc/swagger-output.json');
 
 const usuarioRoutes = require('./src/routes/usuarioRoutes');
 const loginRoutes = require('./src/routes/loginRoutes');
@@ -17,7 +17,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // Documentação Swagger
-//app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // Rotas
 app.get('/install', usuarioController.installAdmin);
